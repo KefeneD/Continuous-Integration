@@ -260,11 +260,12 @@ namespace TestProject1
             _libraryService.AddUser(user1);
             _libraryService.AddUser(user2);
             _libraryService.AddBook(book);
+// Trigger test run
 
             // Act: Borrow the book for User 1
             _libraryService.BorrowBook(user1, book);
 
-            // Act: Try to borrow the same book for User 2 (this should fail, as it’s already borrowed)
+            // Act: Try to borrow the same book for User 2 (this should fail, as itÂ’s already borrowed)
             _libraryService.BorrowBook(user2, book);
 
             // Xunit.Assert: The book should still only be in User 1's borrowed list
