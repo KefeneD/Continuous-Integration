@@ -11,8 +11,4 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
-  </ItemGroup>
-
 </Project>
