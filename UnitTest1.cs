@@ -260,7 +260,8 @@ namespace TestProject1
             _libraryService.AddUser(user1);
             _libraryService.AddUser(user2);
             _libraryService.AddBook(book);
-// Trigger test run
+Passed! - Failed: 0, Passed: 1, Skipped: 0
+
 
             // Act: Borrow the book for User 1
             _libraryService.BorrowBook(user1, book);
