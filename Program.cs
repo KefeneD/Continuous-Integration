@@ -1,4 +1,4 @@
-using Lab5Blazor.Components;
+/*using Lab5Blazor.Components;*/
 using Lab5Blazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
