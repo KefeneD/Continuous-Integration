@@ -14,7 +14,7 @@ namespace Lab5Blazor.Tests
         [TestMethod]
         public void AlwaysFails()
         {
-            Assert.AreEqual(1, 2); // <- You can use this to test failure later
+            Assert.AreEqual(1, 2); // <-- This will fail on purpose
         }
     }
 }
