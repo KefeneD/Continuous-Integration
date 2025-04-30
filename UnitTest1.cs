@@ -16,8 +16,228 @@ namespace Lab5Blazor.Tests
         {
             _libraryService = new LibraryService();
         }
-// Final test run
+        public void EditBook(Book book)
+        {
+            var existingBook = Books.FirstOrDefault(b => b.Id == book.Id);
+            if (existingBook != null)
+            {
+                existingBook.Title = book.Title;
+                existingBook.Author = book.Author;
+                existingBook.ISBN = book.ISBN;
+                SaveBooks();
+            }
+        }
 
+        public void DeleteBook(int bookId)
+        {
+            var book = Books.FirstOrDefault(b => b.Id == bookId);
+            if (book != null)
+            {
+                Books.Remove(book);
+                SaveBooks();
+            }
+        }
+
+        public async void SaveBooks()
+        {
+            using (var writer = new StreamWriter(booksFilePath))
+            {
+                foreach (Book book in Books)
+                {
+                    string str = $"{book.Id}, {book.Title}, {book.Author}, {book.ISBN}";
+                    await writer.WriteLineAsync(str);
+                }
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+            SaveUsers();
+        }
+
+        public void EditUser(User user)
+        {
+            var existingUser = Users.FirstOrDefault(u => u.Id == user.Id);
+            if (existingUser != null)
+            {
+                existingUser.Name = user.Name;
+                existingUser.Email = user.Email;
+                SaveUsers();
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            var user = Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                Users.Remove(user);
+            }
+            SaveUsers();
+        }
+
+        public async void SaveUsers()
+        {
+            using (var writer = new StreamWriter(usersFilePath))
+            {
+                foreach (User user in Users)
+                {
+                    string str = $"{user.Id}, {user.Name}, {user.Email}";
+                    await writer.WriteLineAsync(str);
+                }
+            }
+        }
+
+        public void BorrowBook(User user, Book book)
+        {
+            if (!BorrowedBooks.ContainsKey(user))
+                BorrowedBooks[user] = new List<Book>();
+
+            BorrowedBooks[user].Add(book);
+        }
+
+        public void ReturnBook(User user, Book book)
+        {
+            if (BorrowedBooks.ContainsKey(user))
+            {
+                BorrowedBooks[user].Remove(book);
+            }
+        }
+    }
+
+    public interface ILibraryService
+    {
+        List<Book> Books { get; set; }
+        List<User> Users { get; set; }
+        Dictionary<User, List<Book>> BorrowedBooks { get; set; }
+
+        void ReadBooks();
+        void ReadUsers();
+        void AddBook(Book book);
+        void EditBook(Book book);
+        void DeleteBook(int bookId);
+        void SaveBooks();
+        void AddUser(User user);
+        void EditUser(User user);
+        void DeleteUser(int userId);
+        void SaveUsers();
+        void BorrowBook(User user, Book book);
+        void ReturnBook(User user, Book book);
+    }
+}
+        public void EditBook(Book book)
+        {
+            var existingBook = Books.FirstOrDefault(b => b.Id == book.Id);
+            if (existingBook != null)
+            {
+                existingBook.Title = book.Title;
+                existingBook.Author = book.Author;
+                existingBook.ISBN = book.ISBN;
+                SaveBooks();
+            }
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            var book = Books.FirstOrDefault(b => b.Id == bookId);
+            if (book != null)
+            {
+                Books.Remove(book);
+                SaveBooks();
+            }
+        }
+
+        public async void SaveBooks()
+        {
+            using (var writer = new StreamWriter(booksFilePath))
+            {
+                foreach (Book book in Books)
+                {
+                    string str = $"{book.Id}, {book.Title}, {book.Author}, {book.ISBN}";
+                    await writer.WriteLineAsync(str);
+                }
+            }
+        }
+
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+            SaveUsers();
+        }
+
+        public void EditUser(User user)
+        {
+            var existingUser = Users.FirstOrDefault(u => u.Id == user.Id);
+            if (existingUser != null)
+            {
+                existingUser.Name = user.Name;
+                existingUser.Email = user.Email;
+                SaveUsers();
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            var user = Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                Users.Remove(user);
+            }
+            SaveUsers();
+        }
+
+        public async void SaveUsers()
+        {
+            using (var writer = new StreamWriter(usersFilePath))
+            {
+                foreach (User user in Users)
+                {
+                    string str = $"{user.Id}, {user.Name}, {user.Email}";
+                    await writer.WriteLineAsync(str);
+                }
+            }
+        }
+
+        public void BorrowBook(User user, Book book)
+        {
+            if (!BorrowedBooks.ContainsKey(user))
+                BorrowedBooks[user] = new List<Book>();
+
+            BorrowedBooks[user].Add(book);
+        }
+
+        public void ReturnBook(User user, Book book)
+        {
+            if (BorrowedBooks.ContainsKey(user))
+            {
+                BorrowedBooks[user].Remove(book);
+            }
+        }
+    }
+
+    public interface ILibraryService
+    {
+        List<Book> Books { get; set; }
+        List<User> Users { get; set; }
+        Dictionary<User, List<Book>> BorrowedBooks { get; set; }
+
+        void ReadBooks();
+        void ReadUsers();
+        void AddBook(Book book);
+        void EditBook(Book book);
+        void DeleteBook(int bookId);
+        void SaveBooks();
+        void AddUser(User user);
+        void EditUser(User user);
+        void DeleteUser(int userId);
+        void SaveUsers();
+        void BorrowBook(User user, Book book);
+        void ReturnBook(User user, Book book);
+    }
+}
+
+// retry after fix
         [TestMethod]
         public void AddBook_ShouldAddBook_WhenBookIsValid()
         {
