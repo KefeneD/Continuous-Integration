@@ -99,11 +99,12 @@ namespace Lab5Blazor.Tests
             _libraryService.DeleteUser(user.Id);
         }
 
-        [TestMethod]
-        public void TriggerFailure_TestFailsOnPurpose()
-        {
-            // This test will fail intentionally for Lab 7 CI workflow
-            Assert.AreEqual(1, 2);
-        }
+                //[TestMethod]
+        //public void TriggerFailure_TestFailsOnPurpose()
+        //{
+        //    // This test will fail intentionally for Lab 7 CI workflow
+        //    Assert.AreEqual(1, 2);
+        //}
+
     }
 }
