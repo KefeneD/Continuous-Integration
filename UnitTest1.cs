@@ -16,6 +16,7 @@ namespace Lab5Blazor.Tests
         {
             _libraryService = new LibraryService();
         }
+// Final test run
 
         [TestMethod]
         public void AddBook_ShouldAddBook_WhenBookIsValid()
